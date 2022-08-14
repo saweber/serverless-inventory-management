@@ -40,6 +40,7 @@ I'm assuming that eventually consistent reads are acceptable. Not implemented is
 - Familiarity
 - CDK stack based
 - Local debugging of Lambda functions
+- Bootstrap / code generation for dynamodb and graphql is effective
 
 ### Github Actions
 
@@ -61,5 +62,6 @@ This should also work with npm.
 
 - Authentication / Authorization - complicated topics on their own that require significant thought and time.
 - Automated testing - extremely important, but there is no significant business logic to test at this time, and integration and e2e tests are going to take a significant amount of time.
+- Schema refactoring - I would do some subentities, like location on a warehouse, to clearly group correlated fields.
 
 ## Shortcomings and Limitations

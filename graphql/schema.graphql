@@ -1,0 +1,37 @@
+type Product {
+  id: ID!
+  inventoryCost: Float!
+  inventoryCount: Int!
+  inventoryValue: Float!
+  itemCost: Float!
+  itemPrice: Float!
+  manufacturer: String!
+  name: String!
+}
+
+type Query {
+  product(id: String!): Product!
+  products: [Product!]!
+  productsInWarehouse(warehouseId: String!): [WarehouseProduct!]!
+  warehouse(id: String!): Warehouse!
+  warehouseProduct(productId: String!, warehouseId: String!): WarehouseProduct!
+  warehouses: [Warehouse!]!
+  warehousesForProduct(productId: String!): [WarehouseProduct!]!
+}
+
+type Warehouse {
+  address: String!
+  city: String!
+  id: String!
+  phoneNumber: String!
+  stateAbbreviation: String!
+  zipCode: String!
+}
+
+type WarehouseProduct {
+  inventoryCost: Float!
+  inventoryCount: Int!
+  inventoryValue: Float!
+  productId: String!
+  warehouseId: String!
+}

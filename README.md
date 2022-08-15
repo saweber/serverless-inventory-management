@@ -13,7 +13,7 @@ My intention is to build out a minimal first slice of the case interview. I focu
    d. Manually load table with some data to validate above steps
 2. Design and build out basic API for returning data
 3. Design and build out ingestion process
-   a. SST/CDK stack for required resources
+   a. SST stack for required resources
    b. Write lambda code
 
 ## Decisions and Assumptions
@@ -63,5 +63,7 @@ This should also work with npm.
 - Authentication / Authorization - complicated topics on their own that require significant thought and time.
 - Automated testing - extremely important, but there is no significant business logic to test at this time, and integration and e2e tests are going to take a significant amount of time.
 - Schema refactoring - I would do some subentities, like location on a warehouse, to clearly group correlated fields.
+- No service layer between repository and graphql resolvers - currently there is no 'business logic' or significant data transformation.
+- No error handling on the API, this only assumes the 'happy path'
 
 ## Shortcomings and Limitations

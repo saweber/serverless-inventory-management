@@ -1,7 +1,7 @@
 import {
   WarehouseProduct,
   WarehouseProductEntityType,
-} from "@inventory-management/core/warehouseProduct";
+} from "@inventory-management/repository/warehouseProduct";
 import { builder } from "../builder";
 
 const WarehouseProductType = builder

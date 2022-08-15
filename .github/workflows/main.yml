@@ -37,7 +37,7 @@ jobs:
         run: yarn install
       - name: Build Lambda
         run: yarn build
-      - name: Run Tests
-        run: yarn test
+      # - name: Run Tests
+        # run: yarn test
       - name: Deploy to AWS
         run: yarn sst deploy --stage prod

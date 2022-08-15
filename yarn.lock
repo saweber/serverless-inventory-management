@@ -348,14 +348,6 @@
   dependencies:
     tslib "^2.3.1"
 
-"@aws-sdk/lib-dynamodb@^3.54.1":
-  version "3.145.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-dynamodb/-/lib-dynamodb-3.145.0.tgz#75e08c661568a534f436b8f6ef9680d82ef7111b"
-  integrity sha512-8w5cEbeDYzvJtnlBIT6H41+NDe2XG0OGOrYr5ZFbCRlPwX1sPW7FAx6jhqgUvEAhi15MLh5kVaDwjK1w1k8prw==
-  dependencies:
-    "@aws-sdk/util-dynamodb" "3.145.0"
-    tslib "^2.3.1"
-
 "@aws-sdk/middleware-content-length@3.127.0":
   version "3.127.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/middleware-content-length/-/middleware-content-length-3.127.0.tgz#662c1971fdb2dd7d34a9945ebd8da52578900434"
@@ -628,7 +620,7 @@
     "@aws-sdk/types" "3.127.0"
     tslib "^2.3.1"
 
-"@aws-sdk/util-dynamodb@3.145.0":
+"@aws-sdk/util-dynamodb@^3.145.0":
   version "3.145.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.145.0.tgz#337fcafd938411d2cbf3769a1d71ff5cebc580d2"
   integrity sha512-Vj+hJ2s9AsKTZHs0s4v3SmtQdK46C/nUn6XpWXMjXvCcZI5yNRam689+9FspGNGyLosWOMskPQFE0YmjpjIYWQ==
@@ -1906,14 +1898,6 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
-electrodb@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/electrodb/-/electrodb-1.11.1.tgz#93dbfee2a62fc95094540acf5b53892ed891a387"
-  integrity sha512-UOLQ8gGp7C52qrhE8zwI1yf2E/LqeG13dhpAPJnNqdHUz1gDfrjPmJALk2fKolg5dT9qr1IcPEnAhBQWzv72Iw==
-  dependencies:
-    "@aws-sdk/lib-dynamodb" "^3.54.1"
-    jsonschema "1.2.7"
-
 elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
@@ -2957,11 +2941,6 @@ jsonfile@^6.0.1:
     universalify "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
-
-jsonschema@1.2.7:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.7.tgz#4e6d6dc4d83dc80707055ba22c00ec6152c0e6e9"
-  integrity sha512-3dFMg9hmI9LdHag/BRIhMefCfbq1hicvYMy8YhZQorAdzOzWz7NjniSpn39yjpzUAMIWtGyyZuH2KNBloH7ZLw==
 
 jsonschema@^1.4.1:
   version "1.4.1"

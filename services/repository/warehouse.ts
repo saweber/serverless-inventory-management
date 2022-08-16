@@ -37,9 +37,10 @@ export async function GetWarehouses() {
 export async function GetWarehouse(warehouseId: string) {
   const input: QueryCommandInput = {
     TableName: tableName,
-    KeyConditionExpression: "#pk = :pk",
+    KeyConditionExpression: "#pk = :pk and #sk = :pk",
     ExpressionAttributeNames: {
-      "#pk" : "pk"
+      "#pk": "pk",
+      "#sk": "sk"
     },
     ExpressionAttributeValues: {
       ":pk": { S:  "warehouse#" + warehouseId}

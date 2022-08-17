@@ -1,6 +1,7 @@
 import { App } from "@serverless-stack/resources";
 import { Api } from "./Api";
 import { Database } from "./Database";
+import { WarehouseStorage } from "./Storage";
 
 export default function main(app: App) {
   app.setDefaultFunctionProps({
@@ -8,6 +9,7 @@ export default function main(app: App) {
     srcPath: "services",
   });
   app
+    .stack(WarehouseStorage)
     .stack(Database)
-    .stack(Api)
+    .stack(Api);
 }

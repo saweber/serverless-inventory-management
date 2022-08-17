@@ -58,6 +58,8 @@ I'm assuming that eventually consistent reads are acceptable. Not implemented is
 
 This should also work with npm.
 
+`Inventory API.postman_collection.json` -> load into postman, set the `endpoint` variable to the API gateway endpoint.
+
 ## Skipped for Time
 
 - Authentication / Authorization - complicated topics on their own that require significant thought and time.

@@ -21,13 +21,13 @@ export interface Product {
 }
 
 export interface Query {
+    inventory: WarehouseProduct
+    inventoryForProduct: WarehouseProduct[]
+    inventoryInWarehouse: WarehouseProduct[]
     product: Product
     products: Product[]
-    productsInWarehouse: WarehouseProduct[]
     warehouse: Warehouse
-    warehouseProduct: WarehouseProduct
     warehouses: Warehouse[]
-    warehousesForProduct: WarehouseProduct[]
     __typename: 'Query'
 }
 
@@ -45,6 +45,8 @@ export interface WarehouseProduct {
     inventoryCost: Scalars['Float']
     inventoryCount: Scalars['Int']
     inventoryValue: Scalars['Float']
+    itemCost: Scalars['Float']
+    itemPrice: Scalars['Float']
     productId: Scalars['String']
     warehouseId: Scalars['String']
     __typename: 'WarehouseProduct'
@@ -64,13 +66,13 @@ export interface ProductRequest{
 }
 
 export interface QueryRequest{
+    inventory?: [{productId: Scalars['String'],warehouseId: Scalars['String']},WarehouseProductRequest]
+    inventoryForProduct?: [{productId: Scalars['String']},WarehouseProductRequest]
+    inventoryInWarehouse?: [{warehouseId: Scalars['String']},WarehouseProductRequest]
     product?: [{id: Scalars['String']},ProductRequest]
     products?: ProductRequest
-    productsInWarehouse?: [{warehouseId: Scalars['String']},WarehouseProductRequest]
     warehouse?: [{id: Scalars['String']},WarehouseRequest]
-    warehouseProduct?: [{productId: Scalars['String'],warehouseId: Scalars['String']},WarehouseProductRequest]
     warehouses?: WarehouseRequest
-    warehousesForProduct?: [{productId: Scalars['String']},WarehouseProductRequest]
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -90,6 +92,8 @@ export interface WarehouseProductRequest{
     inventoryCost?: boolean | number
     inventoryCount?: boolean | number
     inventoryValue?: boolean | number
+    itemCost?: boolean | number
+    itemPrice?: boolean | number
     productId?: boolean | number
     warehouseId?: boolean | number
     __typename?: boolean | number
@@ -151,23 +155,23 @@ export interface ProductObservableChain{
 }
 
 export interface QueryPromiseChain{
+    inventory: ((args: {productId: Scalars['String'],warehouseId: Scalars['String']}) => WarehouseProductPromiseChain & {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>) => Promise<FieldsSelection<WarehouseProduct, R>>}),
+    inventoryForProduct: ((args: {productId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Promise<FieldsSelection<WarehouseProduct, R>[]>}),
+    inventoryInWarehouse: ((args: {warehouseId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Promise<FieldsSelection<WarehouseProduct, R>[]>}),
     product: ((args: {id: Scalars['String']}) => ProductPromiseChain & {get: <R extends ProductRequest>(request: R, defaultValue?: FieldsSelection<Product, R>) => Promise<FieldsSelection<Product, R>>}),
     products: ({get: <R extends ProductRequest>(request: R, defaultValue?: FieldsSelection<Product, R>[]) => Promise<FieldsSelection<Product, R>[]>}),
-    productsInWarehouse: ((args: {warehouseId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Promise<FieldsSelection<WarehouseProduct, R>[]>}),
     warehouse: ((args: {id: Scalars['String']}) => WarehousePromiseChain & {get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>) => Promise<FieldsSelection<Warehouse, R>>}),
-    warehouseProduct: ((args: {productId: Scalars['String'],warehouseId: Scalars['String']}) => WarehouseProductPromiseChain & {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>) => Promise<FieldsSelection<WarehouseProduct, R>>}),
-    warehouses: ({get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>[]) => Promise<FieldsSelection<Warehouse, R>[]>}),
-    warehousesForProduct: ((args: {productId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Promise<FieldsSelection<WarehouseProduct, R>[]>})
+    warehouses: ({get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>[]) => Promise<FieldsSelection<Warehouse, R>[]>})
 }
 
 export interface QueryObservableChain{
+    inventory: ((args: {productId: Scalars['String'],warehouseId: Scalars['String']}) => WarehouseProductObservableChain & {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>) => Observable<FieldsSelection<WarehouseProduct, R>>}),
+    inventoryForProduct: ((args: {productId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Observable<FieldsSelection<WarehouseProduct, R>[]>}),
+    inventoryInWarehouse: ((args: {warehouseId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Observable<FieldsSelection<WarehouseProduct, R>[]>}),
     product: ((args: {id: Scalars['String']}) => ProductObservableChain & {get: <R extends ProductRequest>(request: R, defaultValue?: FieldsSelection<Product, R>) => Observable<FieldsSelection<Product, R>>}),
     products: ({get: <R extends ProductRequest>(request: R, defaultValue?: FieldsSelection<Product, R>[]) => Observable<FieldsSelection<Product, R>[]>}),
-    productsInWarehouse: ((args: {warehouseId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Observable<FieldsSelection<WarehouseProduct, R>[]>}),
     warehouse: ((args: {id: Scalars['String']}) => WarehouseObservableChain & {get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>) => Observable<FieldsSelection<Warehouse, R>>}),
-    warehouseProduct: ((args: {productId: Scalars['String'],warehouseId: Scalars['String']}) => WarehouseProductObservableChain & {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>) => Observable<FieldsSelection<WarehouseProduct, R>>}),
-    warehouses: ({get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>[]) => Observable<FieldsSelection<Warehouse, R>[]>}),
-    warehousesForProduct: ((args: {productId: Scalars['String']}) => {get: <R extends WarehouseProductRequest>(request: R, defaultValue?: FieldsSelection<WarehouseProduct, R>[]) => Observable<FieldsSelection<WarehouseProduct, R>[]>})
+    warehouses: ({get: <R extends WarehouseRequest>(request: R, defaultValue?: FieldsSelection<Warehouse, R>[]) => Observable<FieldsSelection<Warehouse, R>[]>})
 }
 
 export interface WarehousePromiseChain{
@@ -192,6 +196,8 @@ export interface WarehouseProductPromiseChain{
     inventoryCost: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Promise<Scalars['Float']>}),
     inventoryCount: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     inventoryValue: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Promise<Scalars['Float']>}),
+    itemCost: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Promise<Scalars['Float']>}),
+    itemPrice: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Promise<Scalars['Float']>}),
     productId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     warehouseId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
 }
@@ -200,6 +206,8 @@ export interface WarehouseProductObservableChain{
     inventoryCost: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Observable<Scalars['Float']>}),
     inventoryCount: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     inventoryValue: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Observable<Scalars['Float']>}),
+    itemCost: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Observable<Scalars['Float']>}),
+    itemPrice: ({get: (request?: boolean|number, defaultValue?: Scalars['Float']) => Observable<Scalars['Float']>}),
     productId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     warehouseId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }

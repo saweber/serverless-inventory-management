@@ -2,6 +2,6 @@ import { builder } from "./builder";
 
 import "./types/warehouse";
 import "./types/product";
-import "./types/warehouseProduct";
+import "./types/inventory";
 
 export const schema = builder.toSchema({});

@@ -18,7 +18,7 @@ export type ProductEntityType = {
   name: string;
 }
 
-export async function GetProducts() {
+export async function GetProducts() : Promise<any> {
   const input : QueryCommandInput = {
     IndexName: "gsi2",
     TableName: tableName,
@@ -36,7 +36,7 @@ export async function GetProducts() {
   return items
 }
 
-export async function GetProduct(productId: string) {
+export async function GetProduct(productId: string) : Promise<any> {
    const input: QueryCommandInput = {
     TableName: tableName,
     KeyConditionExpression: "#pk = :pk and #sk = :pk",

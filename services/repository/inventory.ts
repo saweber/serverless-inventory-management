@@ -1,4 +1,4 @@
-export * as WarehouseProduct from "./warehouseProduct"
+export * as Inventory from "./inventory"
 
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb"
@@ -7,15 +7,17 @@ import { GetClient, GetTableName } from "./dynamo";
 const client = GetClient();
 const tableName = GetTableName();
 
-export type WarehouseProductEntityType = {
+export type InventoryEntityType = {
   warehouseId: string;
   productId: string;
   inventoryCost: number;
   inventoryCount: number;
   inventoryValue: number;
+  itemCost: number;
+  itemPrice: number;
 }
 
-export async function GetWarehouseProduct(warehouseId: string, productId: string) {
+export async function GetInventoryForProductAndWarehouse(productId: string, warehouseId: string) : Promise<any> {
   const input: QueryCommandInput = {
     TableName: tableName,
     KeyConditionExpression: "#pk = :warehouseId and #sk = :productId",
@@ -38,7 +40,7 @@ export async function GetWarehouseProduct(warehouseId: string, productId: string
   }
 }
 
-export async function GetProductsInWarehouse(warehouseId: string) {
+export async function GetInventoryForWarehouse(warehouseId: string) : Promise<any> {
   const input: QueryCommandInput = {
     TableName: tableName,
     KeyConditionExpression: "#pk = :warehouseId and begins_with(#sk,:product) ",
@@ -61,7 +63,7 @@ export async function GetProductsInWarehouse(warehouseId: string) {
   }
 }
 
-export async function GetWarehousesForProduct(productId: string) {
+export async function GetInventoryForProduct(productId: string) : Promise<any> {
   const input: QueryCommandInput = {
     TableName: tableName,
     IndexName: "gsi1",

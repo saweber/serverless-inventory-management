@@ -6,17 +6,15 @@ export function WarehouseStorage({ stack }: StackContext) {
     notifications: {
       resize: {
         function: {
-          handler: "functions/processCsv/warehouseHandler.handler",
+          handler: "functions/processCsv/warehouse.handler",
         },
         events: ["object_created"],
       },
     },
   });
 
-  // Allow the notification functions to access the bucket
   warehouseBucket.attachPermissions([warehouseBucket]);
 
-  // Show the endpoint in the output
   stack.addOutputs({
     BucketName: warehouseBucket.bucketName,
   });
@@ -24,15 +22,43 @@ export function WarehouseStorage({ stack }: StackContext) {
   return warehouseBucket;
 }
 
-// export function WarehouseInventoryStorage({ stack }: StackContext) {
-//   const warehouseInventoryBucket = new Bucket(stack, "warehouseInventory", {});
+export function WarehouseInventoryStorage({ stack }: StackContext) {
+  const inventoryBucket = new Bucket(stack, "inventory", {
+    notifications: {
+      resize: {
+        function: {
+          handler: "functions/processCsv/inventory.handler",
+        },
+        events: ["object_created"],
+      },
+    },
+  });
 
-//   return warehouseInventoryBucket;
-// }
+  inventoryBucket.attachPermissions([inventoryBucket]);
 
-// export function ProductStorage({ stack }: StackContext) {
-//   const productBucket = new Bucket(stack, "product", {});
+  stack.addOutputs({
+    BucketName: inventoryBucket.bucketName,
+  });
 
-//   return productBucket;
-// }
+  return inventoryBucket;
+}
 
+export function ProductStorage({ stack }: StackContext) {
+  const productBucket = new Bucket(stack, "product", {
+    notifications: {
+      resize: {
+        function: {
+          handler: "functions/processCsv/product.handler",
+        },
+        events: ["object_created"],
+      },
+    },
+  });
+
+  productBucket.attachPermissions([productBucket]);
+
+  stack.addOutputs({
+    BucketName: productBucket.bucketName,
+  });
+  return productBucket;
+}

@@ -10,13 +10,13 @@ type Product {
 }
 
 type Query {
+  inventory(productId: String!, warehouseId: String!): WarehouseProduct!
+  inventoryForProduct(productId: String!): [WarehouseProduct!]!
+  inventoryInWarehouse(warehouseId: String!): [WarehouseProduct!]!
   product(id: String!): Product!
   products: [Product!]!
-  productsInWarehouse(warehouseId: String!): [WarehouseProduct!]!
   warehouse(id: String!): Warehouse!
-  warehouseProduct(productId: String!, warehouseId: String!): WarehouseProduct!
   warehouses: [Warehouse!]!
-  warehousesForProduct(productId: String!): [WarehouseProduct!]!
 }
 
 type Warehouse {
@@ -32,6 +32,8 @@ type WarehouseProduct {
   inventoryCost: Float!
   inventoryCount: Int!
   inventoryValue: Float!
+  itemCost: Float!
+  itemPrice: Float!
   productId: String!
   warehouseId: String!
 }

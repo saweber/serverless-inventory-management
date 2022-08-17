@@ -1,11 +1,11 @@
 import {
-  WarehouseProduct,
-  WarehouseProductEntityType,
-} from "@inventory-management/repository/warehouseProduct";
+  Inventory,
+  InventoryEntityType,
+} from "@inventory-management/repository/inventory";
 import { builder } from "../builder";
 
-const WarehouseProductType = builder
-  .objectRef<WarehouseProductEntityType>("WarehouseProduct")
+const InventoryType = builder
+  .objectRef<InventoryEntityType>("WarehouseProduct")
   .implement({
     fields: (t) => ({
       warehouseId: t.exposeString("warehouseId"),
@@ -13,33 +13,36 @@ const WarehouseProductType = builder
       inventoryCost: t.exposeFloat("inventoryCost"),
       inventoryCount: t.exposeInt("inventoryCount"),
       inventoryValue: t.exposeFloat("inventoryValue"),
+      itemCost: t.exposeFloat("itemCost"),
+      itemPrice: t.exposeFloat("itemPrice"),
     }),
   });
 
 builder.queryFields((t) => ({
-  warehouseProduct: t.field({
-    type: WarehouseProductType,
+  inventory: t.field({
+    type: InventoryType,
     args: {
       warehouseId: t.arg.string({ required: true }),
       productId: t.arg.string({ required: true }),
     },
     resolve: (_, args) =>
-      WarehouseProduct.GetWarehouseProduct(args.warehouseId, args.productId),
+      Inventory.GetInventoryForProductAndWarehouse(
+        args.productId,
+        args.warehouseId
+      ),
   }),
-  productsInWarehouse: t.field({
-    type: [WarehouseProductType],
+  inventoryInWarehouse: t.field({
+    type: [InventoryType],
     args: {
       warehouseId: t.arg.string({ required: true }),
     },
-    resolve: (_, args) =>
-      WarehouseProduct.GetProductsInWarehouse(args.warehouseId),
+    resolve: (_, args) => Inventory.GetInventoryForWarehouse(args.warehouseId),
   }),
-  warehousesForProduct: t.field({
-    type: [WarehouseProductType],
+  inventoryForProduct: t.field({
+    type: [InventoryType],
     args: {
       productId: t.arg.string({ required: true }),
     },
-    resolve: (_, args) =>
-      WarehouseProduct.GetWarehousesForProduct(args.productId),
+    resolve: (_, args) => Inventory.GetInventoryForProduct(args.productId),
   }),
 }));

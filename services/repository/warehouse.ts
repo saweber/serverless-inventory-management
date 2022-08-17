@@ -16,7 +16,7 @@ export type WarehouseEntityType = {
   zipCode: string;
 }
 
-export async function GetWarehouses() {
+export async function GetWarehouses() : Promise<any> {
   const input : QueryCommandInput = {
     IndexName: "gsi1",
     TableName: tableName,
@@ -34,7 +34,7 @@ export async function GetWarehouses() {
   return items
 }
 
-export async function GetWarehouse(warehouseId: string) {
+export async function GetWarehouse(warehouseId: string) : Promise<any> {
   const input: QueryCommandInput = {
     TableName: tableName,
     KeyConditionExpression: "#pk = :pk and #sk = :pk",

@@ -41,37 +41,7 @@ export default {
         "Int": {},
         "String": {},
         "Query": {
-            "product": [
-                0,
-                {
-                    "id": [
-                        4,
-                        "String!"
-                    ]
-                }
-            ],
-            "products": [
-                0
-            ],
-            "productsInWarehouse": [
-                7,
-                {
-                    "warehouseId": [
-                        4,
-                        "String!"
-                    ]
-                }
-            ],
-            "warehouse": [
-                6,
-                {
-                    "id": [
-                        4,
-                        "String!"
-                    ]
-                }
-            ],
-            "warehouseProduct": [
+            "inventory": [
                 7,
                 {
                     "productId": [
@@ -84,10 +54,7 @@ export default {
                     ]
                 }
             ],
-            "warehouses": [
-                6
-            ],
-            "warehousesForProduct": [
+            "inventoryForProduct": [
                 7,
                 {
                     "productId": [
@@ -95,6 +62,39 @@ export default {
                         "String!"
                     ]
                 }
+            ],
+            "inventoryInWarehouse": [
+                7,
+                {
+                    "warehouseId": [
+                        4,
+                        "String!"
+                    ]
+                }
+            ],
+            "product": [
+                0,
+                {
+                    "id": [
+                        4,
+                        "String!"
+                    ]
+                }
+            ],
+            "products": [
+                0
+            ],
+            "warehouse": [
+                6,
+                {
+                    "id": [
+                        4,
+                        "String!"
+                    ]
+                }
+            ],
+            "warehouses": [
+                6
             ],
             "__typename": [
                 4
@@ -131,6 +131,12 @@ export default {
                 3
             ],
             "inventoryValue": [
+                2
+            ],
+            "itemCost": [
+                2
+            ],
+            "itemPrice": [
                 2
             ],
             "productId": [

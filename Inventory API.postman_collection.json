@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "cc53d02b-20e1-40c3-ae99-f76f8d4b8386",
+		"name": "Inventory API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get warehouses",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query warehouses {\r\n    warehouses {\r\n        id\r\n        phoneNumber\r\n        address\r\n        city\r\n        stateAbbreviation\r\n        zipCode\r\n    }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get warehouse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query warehouse($id: String!) {\r\n    warehouse(id: $id) {\r\n        id\r\n        phoneNumber\r\n        address\r\n        city\r\n        stateAbbreviation\r\n        zipCode\r\n    }\r\n}",
+						"variables": "{\r\n    \"id\" : \"002\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query products {\r\n    products {\r\n        id\r\n        inventoryCost\r\n        inventoryCount\r\n        inventoryValue\r\n        itemCost\r\n        itemPrice\r\n        manufacturer\r\n        name\r\n    }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query product($id: String!) {\r\n    product(id : $id) {\r\n        id\r\n        inventoryCost\r\n        inventoryCount\r\n        inventoryValue\r\n        itemCost\r\n        itemPrice\r\n        manufacturer\r\n        name\r\n    }\r\n}",
+						"variables": "{\r\n    \"id\": \"001\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get inventory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query inventory($productId : String!, $warehouseId : String!) {\r\n    inventory(productId : $productId, warehouseId: $warehouseId) {\r\n        warehouseId\r\n        productId\r\n        inventoryCost\r\n        inventoryCount\r\n        inventoryValue\r\n        itemCost\r\n        itemPrice\r\n    }\r\n}",
+						"variables": "{\r\n    \"productId\": \"001\",\r\n    \"warehouseId\": \"002\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get inventory for warehouse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query inventoryInWarehouse($warehouseId : String!) {\r\n    inventoryInWarehouse(warehouseId: $warehouseId) {\r\n        warehouseId\r\n        productId\r\n        inventoryCost\r\n        inventoryCount\r\n        inventoryValue\r\n        itemCost\r\n        itemPrice\r\n    }\r\n}",
+						"variables": "{\r\n    \"warehouseId\": \"002\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get inventory for product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query inventoryForProduct($productId : String!) {\r\n    inventoryForProduct(productId : $productId) {\r\n        warehouseId\r\n        productId\r\n        inventoryCost\r\n        inventoryCount\r\n        inventoryValue\r\n        itemCost\r\n        itemPrice\r\n    }\r\n}",
+						"variables": "{\r\n    \"productId\": \"001\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/graphql",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

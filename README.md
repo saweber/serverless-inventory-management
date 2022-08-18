@@ -60,12 +60,13 @@ This should also work with npm.
 
 `Inventory API.postman_collection.json` -> load into postman, set the `endpoint` variable to the API gateway endpoint.
 
-## Skipped for Time
+## Skipped for Time and Limitations
 
-- Authentication / Authorization - complicated topics on their own that require significant thought and time.
+- Authentication / Authorization - requires additional time, I would look heavily into lambda authorizers and Cognitio with API Gateway.
 - Automated testing - extremely important, but there is no significant business logic to test at this time, and integration and e2e tests are going to take a significant amount of time.
 - Schema refactoring - I would do some subentities, like location on a warehouse, to clearly group correlated fields.
 - No service layer between repository and graphql resolvers - currently there is no 'business logic' or significant data transformation.
-- No error handling on the API, this only assumes the 'happy path'
-
-## Shortcomings and Limitations
+- No error handling, this only assumes the 'happy path'
+- Especially on data ingestion - code needs refactoring, mostly to reduce repetition
+- No EventBridge or other event stream, instead of piping s3 events directly to lambda
+- This works for small data sets, but more robust pipelines would be needed for ingestion at larger scale (perhaps Glue, Batch, EMR serverless, etc)

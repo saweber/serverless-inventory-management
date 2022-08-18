@@ -1,6 +1,6 @@
 export * as Warehouse from "./warehouse"
 
-import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import { AttributeValue, PutItemCommand, PutItemInput, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb"
 import { GetClient, GetTableName } from "./dynamo";
 
@@ -58,5 +58,25 @@ export async function GetWarehouse(warehouseId: string) : Promise<any> {
 }
 
 export function SaveWarehouse(warehouse: WarehouseEntityType) {
-  console.log(warehouse);
+  const warehouseKey = "warehouse#" + warehouse.id;
+  const time = new Date().toISOString();
+  const item : Record<string, AttributeValue> = {
+    'pk': {S : warehouseKey},
+    'sk': {S: warehouseKey},
+    'entityType': {S : 'warehouse'},
+    'gsi1pk': { S : 'warehouses'},
+    'gsi1sk': { S : time},
+    'id': {S : warehouse.id},
+    'address': {S : warehouse.address},
+    'city': {S : warehouse.city},
+    'stateAbbreviation': {S: warehouse.stateAbbreviation},
+    'zipCode': {S: warehouse.zipCode},
+    'phoneNumber': {S: warehouse.phoneNumber}
+  };
+  const input: PutItemInput = {
+    TableName: tableName,
+    Item: item
+  }
+  const command = new PutItemCommand(input);
+  client.send(command);
 }

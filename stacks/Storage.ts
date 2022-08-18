@@ -1,11 +1,17 @@
-import { Bucket, StackContext } from "@serverless-stack/resources";
+import { Bucket, use, StackContext } from "@serverless-stack/resources";
+import { Database } from "./Database";
 
 export function WarehouseStorage({ stack }: StackContext) {
+  const db = use(Database);
   const warehouseBucket = new Bucket(stack, "warehouse", {
     notifications: {
-      resize: {
+      load: {
         function: {
           handler: "functions/processCsv/warehouse.handler",
+          permissions: [db],
+          environment: {
+            TABLE_NAME: db.tableName,
+          },
         },
         events: ["object_created"],
       },
@@ -22,11 +28,16 @@ export function WarehouseStorage({ stack }: StackContext) {
 }
 
 export function InventoryStorage({ stack }: StackContext) {
+  const db = use(Database);
   const inventoryBucket = new Bucket(stack, "inventory", {
     notifications: {
-      resize: {
+      load: {
         function: {
           handler: "functions/processCsv/inventory.handler",
+          permissions: [db],
+          environment: {
+            TABLE_NAME: db.tableName,
+          },
         },
         events: ["object_created"],
       },
@@ -43,11 +54,16 @@ export function InventoryStorage({ stack }: StackContext) {
 }
 
 export function ProductStorage({ stack }: StackContext) {
+  const db = use(Database);
   const productBucket = new Bucket(stack, "product", {
     notifications: {
-      resize: {
+      load: {
         function: {
           handler: "functions/processCsv/product.handler",
+          permissions: [db],
+          environment: {
+            TABLE_NAME: db.tableName,
+          },
         },
         events: ["object_created"],
       },

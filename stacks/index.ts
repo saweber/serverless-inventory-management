@@ -9,9 +9,9 @@ export default function main(app: App) {
     srcPath: "services",
   });
   app
+    .stack(Database)
     .stack(WarehouseStorage)
     .stack(ProductStorage)
     .stack(InventoryStorage)
-    .stack(Database)
     .stack(Api);
 }

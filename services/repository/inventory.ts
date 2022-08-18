@@ -86,3 +86,7 @@ export async function GetInventoryForProduct(productId: string) : Promise<any> {
     return {}
   }
 }
+
+export function SaveInventory(inventory: InventoryEntityType) {
+  console.log(inventory);
+}

@@ -23,6 +23,7 @@ type Warehouse {
   address: String!
   city: String!
   id: String!
+  name: String!
   phoneNumber: String!
   stateAbbreviation: String!
   zipCode: String!

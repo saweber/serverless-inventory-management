@@ -35,6 +35,7 @@ export interface Warehouse {
     address: Scalars['String']
     city: Scalars['String']
     id: Scalars['String']
+    name: Scalars['String']
     phoneNumber: Scalars['String']
     stateAbbreviation: Scalars['String']
     zipCode: Scalars['String']
@@ -81,6 +82,7 @@ export interface WarehouseRequest{
     address?: boolean | number
     city?: boolean | number
     id?: boolean | number
+    name?: boolean | number
     phoneNumber?: boolean | number
     stateAbbreviation?: boolean | number
     zipCode?: boolean | number
@@ -178,6 +180,7 @@ export interface WarehousePromiseChain{
     address: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     city: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     phoneNumber: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     stateAbbreviation: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     zipCode: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
@@ -187,6 +190,7 @@ export interface WarehouseObservableChain{
     address: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     city: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     phoneNumber: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     stateAbbreviation: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     zipCode: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})

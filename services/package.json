@@ -9,6 +9,7 @@
     "@pothos/core": "^3.14.0",
     "@serverless-stack/node": "^1.7.0",
     "aws-sdk": "^2.1194.0",
+    "csv-parse": "^5.3.0",
     "graphql": "^16.5.0",
     "ulid": "^2.3.0"
   },

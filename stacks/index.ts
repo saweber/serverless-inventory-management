@@ -1,7 +1,7 @@
 import { App } from "@serverless-stack/resources";
 import { Api } from "./Api";
 import { Database } from "./Database";
-import { WarehouseStorage } from "./Storage";
+import { InventoryStorage, ProductStorage, WarehouseStorage } from "./Storage";
 
 export default function main(app: App) {
   app.setDefaultFunctionProps({
@@ -10,6 +10,8 @@ export default function main(app: App) {
   });
   app
     .stack(WarehouseStorage)
+    .stack(ProductStorage)
+    .stack(InventoryStorage)
     .stack(Database)
     .stack(Api);
 }

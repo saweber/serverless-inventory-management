@@ -1,5 +1,4 @@
-import { Bucket, EventBus, StackContext } from "@serverless-stack/resources";
-import * as lambda from "aws-cdk-lib/aws-lambda";
+import { Bucket, StackContext } from "@serverless-stack/resources";
 
 export function WarehouseStorage({ stack }: StackContext) {
   const warehouseBucket = new Bucket(stack, "warehouse", {
@@ -22,7 +21,7 @@ export function WarehouseStorage({ stack }: StackContext) {
   return warehouseBucket;
 }
 
-export function WarehouseInventoryStorage({ stack }: StackContext) {
+export function InventoryStorage({ stack }: StackContext) {
   const inventoryBucket = new Bucket(stack, "inventory", {
     notifications: {
       resize: {

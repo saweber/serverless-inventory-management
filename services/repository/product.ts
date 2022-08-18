@@ -9,9 +9,9 @@ const tableName = GetTableName();
 
 export type ProductEntityType = {
   id: string;
-  inventoryCost: number;
-  inventoryCount: number;
-  inventoryValue: number;
+  inventoryCost?: number;
+  inventoryCount?: number;
+  inventoryValue?: number;
   itemCost: number;
   itemPrice: number;
   manufacturer: string;
@@ -56,4 +56,12 @@ export async function GetProduct(productId: string) : Promise<any> {
   } else {
     return {}
   }
+}
+
+export function SaveProduct(product: ProductEntityType): void {
+  console.log(product);
+}
+
+export function UpdateProduct(productId: string, inventoryCost: number, inventoryCount: number, inventoryValue: number) {
+  console.log(productId);
 }

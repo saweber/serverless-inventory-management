@@ -9,6 +9,7 @@ const tableName = GetTableName();
 
 export type WarehouseEntityType = {
   id: string;
+  name: string;
   phoneNumber: string;
   address: string;
   city: string;
@@ -54,4 +55,8 @@ export async function GetWarehouse(warehouseId: string) : Promise<any> {
   } else {
     return {}
   }
+}
+
+export function SaveWarehouse(warehouse: WarehouseEntityType) {
+  console.log(warehouse);
 }

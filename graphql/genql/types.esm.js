@@ -110,6 +110,9 @@ export default {
             "id": [
                 4
             ],
+            "name": [
+                4
+            ],
             "phoneNumber": [
                 4
             ],

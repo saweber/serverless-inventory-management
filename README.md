@@ -70,3 +70,5 @@ This should also work with npm.
 - Especially on data ingestion - code needs refactoring, mostly to reduce repetition
 - No EventBridge or other event stream, instead of piping s3 events directly to lambda
 - This works for small data sets, but more robust pipelines would be needed for ingestion at larger scale (perhaps Glue, Batch, EMR serverless, etc)
+- Currently there are no deletions - the dynamodb schema supports it through finding records with old timestamps, but the functionality is presently unused.
+- Warehouse and Product files must be uploaded before inventory - otherwise denormalized fields may not have data

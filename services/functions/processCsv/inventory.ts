@@ -26,6 +26,7 @@ export const handler = (event: any, context: any, callback: any) => {
 
 function getParser() {
   let foundHeader = false;
+  let productCounts : any = {};
   const parser = parse({
     delimiter: ",",
   });
@@ -37,20 +38,30 @@ function getParser() {
       } else {
         const warehouseId = record[0].replace("warehouse#", ""); 
         const productId = record[1].replace("product#", "");
+        const count = Number(record[2]);
 
         //FIXME - hashmap product so we only have to fetch it once per product
         const product = await GetProduct(productId);
-        const inventory: InventoryEntityType = {
-          warehouseId: warehouseId,
-          productId: productId,
-          inventoryCount: Number(record[2]),
-          inventoryValue: product.itemPrice * Number(record[2]),
-          itemCost: product.itemCost,
-          itemPrice: product.itemPrice,
-          inventoryCost: product.itemCost * Number(record[2]),
-        };
-        // FIXME - keep track of total inventory counts, so we can update the product table
-        SaveInventory(inventory);
+
+          const inventory: InventoryEntityType = {
+            warehouseId: warehouseId,
+            productId: productId,
+            inventoryCount: count,
+            inventoryValue: product.itemPrice * count,
+            itemCost: product.itemCost,
+            itemPrice: product.itemPrice,
+            inventoryCost: product.itemCost * count,
+          };
+          if (productCounts[productId]) {
+            productCounts[productId].inventoryCount += inventory.inventoryCount;
+          } else {
+            productCounts[productId] = {
+              inventoryCount: inventory.inventoryCount,
+              itemCost: product.itemCost,
+              itemValue: product.itemValue
+          }
+          SaveInventory(inventory);
+        }
       }
     }
   });
@@ -58,8 +69,12 @@ function getParser() {
     console.error(err.message);
   });
   parser.on("end", function () {
-    //FIXME - update the product table with cached values
-    console.log("end of stream");
+    // for (let productId of Object.keys(productCounts) ) {
+    //   const cost = productCounts[productId].itemCost * productCounts[productId].inventoryCount;
+    //   const value = productCounts[productId].itemValue * productCounts[productId].inventoryCount;
+    //   UpdateProduct(productId, cost, productCounts[productId].inventoryCount, value)
+    // }
+    // console.log("end of stream");
   });
   return parser;
 }

@@ -1,6 +1,6 @@
 export * as Product from "./product"
 
-import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import { AttributeValue, PutItemCommand, PutItemInput, QueryCommand, QueryCommandInput, UpdateItemCommand, UpdateItemInput } from "@aws-sdk/client-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { GetClient, GetTableName } from "./dynamo";
 
@@ -59,9 +59,45 @@ export async function GetProduct(productId: string) : Promise<any> {
 }
 
 export function SaveProduct(product: ProductEntityType): void {
-  console.log(product);
+  const productKey = "product#" + product.id
+  const time = new Date().toISOString();
+  const item: Record<string, AttributeValue> = {
+    'pk': { S: productKey },
+    'sk': { S: productKey },
+    'entityType': { S: "product" },
+    'gsi1pk': { S: productKey },
+    'gsi1sk': { S: productKey },
+    'gsi2pk': { S: "products" },
+    'gsi2sk': { S: time },
+    'id': { S: product.id},
+    'name': { S: product.name },
+    'manufacturer': { S: product.manufacturer },
+    'itemCost': { N: product.itemCost.toString() },
+    'itemPrice': { N: product.itemPrice.toString() }
+  }
+  const input: PutItemInput = {
+    TableName: tableName,
+    Item: item
+  }
+  const command = new PutItemCommand(input);
+  client.send(command);
 }
 
 export function UpdateProduct(productId: string, inventoryCost: number, inventoryCount: number, inventoryValue: number) {
-  console.log(productId);
+  const input: UpdateItemInput = {
+    TableName: tableName,
+    Key: {
+      pk: { S: productId },
+      sk: { S: productId }
+    },
+    UpdateExpression: "SET inventoryCost = :cost, inventoryValue = :value, inventoryCount = :count",
+    ExpressionAttributeValues: {
+      ":cost": { N: inventoryCost.toString() },
+      ":value": { N: inventoryValue.toString() },
+      ":count": { N: inventoryCount.toString()}
+    }
+
+  }
+  const command = new UpdateItemCommand(input);
+  client.send(command);
 }

@@ -14,7 +14,7 @@ const WarehouseType = builder
       city: t.exposeString("city"),
       stateAbbreviation: t.exposeString("stateAbbreviation"),
       zipCode: t.exposeString("zipCode"),
-      name: t.exposeString("name")
+      name: t.exposeString("name"),
     }),
   });
 

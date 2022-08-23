@@ -1,4 +1,7 @@
-import { Product, ProductEntityType } from "@inventory-management/repository/product";
+import {
+  Product,
+  ProductEntityType,
+} from "@inventory-management/repository/product";
 import { builder } from "../builder";
 
 const ProductType = builder.objectRef<ProductEntityType>("Product").implement({

@@ -1,6 +1,6 @@
 import {
   WarehouseEntityType,
-  SaveWarehouse,
+  SaveWarehouse
 } from "@inventory-management/repository/warehouse";
 import AWS from "aws-sdk";
 import { parse } from "csv-parse";
@@ -14,7 +14,7 @@ export const handler = (event: any, context: any, callback: any) => {
 
   const readStream = S3.getObject({ Bucket, Key })
     .createReadStream()
-    .on("error", (e) => {
+    .on("error", e => {
       console.log(e);
     });
 
@@ -26,7 +26,7 @@ export const handler = (event: any, context: any, callback: any) => {
 function getParser() {
   let foundHeader = false;
   const parser = parse({
-    delimiter: ",",
+    delimiter: ","
   });
   parser.on("readable", function() {
     let record;
@@ -42,7 +42,7 @@ function getParser() {
           address: record[2],
           city: record[3],
           stateAbbreviation: record[4],
-          zipCode: record[5],
+          zipCode: record[5]
         };
         SaveWarehouse(warehouse);
       }

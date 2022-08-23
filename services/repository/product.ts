@@ -9,9 +9,9 @@ const tableName = GetTableName();
 
 export type ProductEntityType = {
   id: string;
-  inventoryCost?: number;
-  inventoryCount?: number;
-  inventoryValue?: number;
+  inventoryCost: number;
+  inventoryCount: number;
+  inventoryValue: number;
   itemCost: number;
   itemPrice: number;
   manufacturer: string;
@@ -73,7 +73,10 @@ export function SaveProduct(product: ProductEntityType): void {
     'name': { S: product.name },
     'manufacturer': { S: product.manufacturer },
     'itemCost': { N: product.itemCost.toString() },
-    'itemPrice': { N: product.itemPrice.toString() }
+    'itemPrice': { N: product.itemPrice.toString() },
+    'inventoryCost': { N: '0' },
+    'inventoryCount': { N: '0' },
+    'inventoryValue': { N: '0' },
   }
   const input: PutItemInput = {
     TableName: tableName,
@@ -84,11 +87,12 @@ export function SaveProduct(product: ProductEntityType): void {
 }
 
 export function UpdateProduct(productId: string, inventoryCost: number, inventoryCount: number, inventoryValue: number) {
+  const key = `product#${productId}`
   const input: UpdateItemInput = {
     TableName: tableName,
     Key: {
-      pk: { S: productId },
-      sk: { S: productId }
+      pk: { S: key },
+      sk: { S: key }
     },
     UpdateExpression: "SET inventoryCost = :cost, inventoryValue = :value, inventoryCount = :count",
     ExpressionAttributeValues: {

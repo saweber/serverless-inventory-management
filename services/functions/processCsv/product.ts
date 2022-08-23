@@ -1,4 +1,7 @@
-import { ProductEntityType, SaveProduct } from "@inventory-management/repository/product";
+import {
+  ProductEntityType,
+  SaveProduct
+} from "@inventory-management/repository/product";
 import AWS from "aws-sdk";
 import { parse } from "csv-parse";
 
@@ -11,7 +14,7 @@ export const handler = (event: any, context: any, callback: any) => {
 
   const readStream = S3.getObject({ Bucket, Key })
     .createReadStream()
-    .on("error", (e) => {
+    .on("error", e => {
       console.log(e);
     });
 
@@ -23,32 +26,31 @@ export const handler = (event: any, context: any, callback: any) => {
 function getParser() {
   let foundHeader = false;
   const parser = parse({
-    delimiter: ",",
+    delimiter: ","
   });
-  parser.on("readable", function () {
+  parser.on("readable", function() {
     let record;
     while ((record = parser.read()) !== null) {
       if (!foundHeader) {
         foundHeader = true;
       } else {
-        const productId = record[0].replace('product#', '');
+        const productId = record[0].replace("product#", "");
         const product: ProductEntityType = {
           id: productId,
           itemCost: Number(record[3]),
           itemPrice: Number(record[4]),
           manufacturer: record[2],
-          name: record[1],
+          name: record[1]
         };
         SaveProduct(product);
       }
     }
   });
-  parser.on("error", function (err) {
+  parser.on("error", function(err) {
     console.error(err.message);
   });
-  parser.on("end", function () {
+  parser.on("end", function() {
     console.log("end of stream");
   });
   return parser;
 }
-
